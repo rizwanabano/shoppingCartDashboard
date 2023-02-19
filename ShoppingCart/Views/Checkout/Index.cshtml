@@ -1,0 +1,30 @@
+﻿@using Microsoft.Extensions.Options
+@inject IOptions<ShoppingCart.Data.StripeSettings> Stripe
+
+
+@model CartViewModel
+
+@{
+        ViewData["Title"] = "Cart Overview";
+}
+
+
+
+<div class="text-center">
+    <form asp-action="Processing" asp-controller="Checkout" method="post">
+        <article>
+            <label>Amount: $ @Math.Round(@Model.GrandTotal, 2)</label>
+        </article>
+        <script src="https://checkout.stripe.com/checkout.js" class="stripe-button"
+                data-key="@Stripe.Value.PublishableKey"
+                data-amount="@ViewBag.Total"
+                data-name="[Rizwana]"
+                data-description="Cake payments"
+                data-image="https://stripe.com/img/documentation/checkout/marketplace.png"
+                data-locale="en"
+                data-zip-code="true">
+        </script>
+    </form>
+</div>
+Footer
+© 2023 GitHub, Inc.
